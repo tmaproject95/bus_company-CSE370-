@@ -3,6 +3,10 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import BusSearch from './pages/BusSearch';
 import Trips from './pages/Trips';
+import Seats from './pages/Seats';
+
+
+
 import './App.css';
 
 function App() {
@@ -15,6 +19,10 @@ function App() {
                     <Route path="/register" element={<Register />} />
                     <Route path="/search" element={<BusSearch />} />
                     <Route path="/trips" element={<Trips />} />
+                    <Route path="/seats" element={<Seats />} />
+
+
+
                 </Routes>
             </div>
 

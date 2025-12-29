@@ -1,0 +1,30 @@
+.trips-container {
+    padding: 40px;
+    min-height: 100vh;
+    background: rgba(0,0,0,0.6);
+}
+
+.title {
+    text-align: center;
+    color: #ffc107;
+    margin-bottom: 30px;
+}
+
+.trip-card {
+    background: #111;
+    color: white;
+    padding: 20px;
+    margin: 15px auto;
+    max-width: 500px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(255,193,7,0.3);
+}
+
+.trip-card button {
+    margin-top: 10px;
+    padding: 8px 16px;
+    background: #ffc107;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}

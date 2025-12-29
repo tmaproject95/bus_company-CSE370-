@@ -1,0 +1,59 @@
+.seats-page {
+    min-height: 100vh;
+    background: black;
+    color: white;
+    padding: 40px;
+    text-align: center;
+}
+
+.bus {
+    margin-top: 30px;
+    display: inline-block;
+    padding: 20px;
+    background: #111;
+    border-radius: 12px;
+}
+
+.seat-row {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 12px;
+}
+
+.seat-side {
+    display: flex;
+    gap: 10px;
+}
+
+.aisle {
+    width: 40px;
+}
+
+.seat {
+    width: 50px;
+    height: 50px;
+    background: #2ecc71;
+    color: #000;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.seat:hover {
+    background: #27ae60;
+    transform: scale(1.05);
+}
+.seats-page {
+    padding-top: 40px;
+}
+
+.seats-page h2 {
+    text-align: center;
+    color: #ffffff;
+    margin-top: 100px;
+}
