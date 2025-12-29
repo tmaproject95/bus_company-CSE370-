@@ -1,12 +1,13 @@
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import axios from '../api/axios';
+import { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import axios from "../api/axios";
 
 const Login = () => {
-    const [formData, setFormData] = useState({ em: '', pa: '' });
-    const [pos, setPos] = useState({ x: 0, y: 0 });
-    const [dragging, setDragging] = useState(false);
-    const [rel, setRel] = useState({ x: 0, y: 0 });
+    const [formData, setFormData] = useState({
+        em: "",
+        pa: ""
+    });
+
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -16,32 +17,12 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('/user/login', formData);
-            alert("Login Successful!");
-            console.log(response.data);
-            navigate('/');
+            await axios.post("/user/login", formData);
+            alert("Login Successful");
+            navigate("/search");
         } catch (err) {
-            console.error(err);
-            alert(err.response?.data || "Login Failed");
+            alert(err.response?.data || "Invalid credentials");
         }
-    };
-
-    const handleMouseDown = (e) => {
-        setDragging(true);
-        setRel({
-            x: e.clientX - pos.x,
-            y: e.clientY - pos.y
-        });
-    };
-
-    const handleMouseUp = () => setDragging(false);
-
-    const handleMouseMove = (e) => {
-        if (!dragging) return;
-        setPos({
-            x: e.clientX - rel.x,
-            y: e.clientY - rel.y
-        });
     };
 
     return (
@@ -49,36 +30,20 @@ const Login = () => {
             <header className="page-header">
                 Horizon Transport Services Limited
             </header>
-            <div
-                className="auth-container"
-                onMouseDown={handleMouseDown}
-                onMouseUp={handleMouseUp}
-                onMouseMove={handleMouseMove}
-                style={{ left: pos.x, top: pos.y, position: 'absolute', cursor: 'grab' }}
-            >
-                <h2>Welcome Back</h2>
+
+            <div className="auth-container">
+                <h2>Login</h2>
                 <form onSubmit={handleSubmit}>
-                    <input
-                        type="email"
-                        name="em"
-                        placeholder="Email Address"
-                        onChange={handleChange}
-                        required
-                    />
-                    <input
-                        type="password"
-                        name="pa"
-                        placeholder="Password"
-                        onChange={handleChange}
-                        required
-                    />
+                    <input type="email" name="em" placeholder="Email" onChange={handleChange} required />
+                    <input type="password" name="pa" placeholder="Password" onChange={handleChange} required />
                     <button type="submit">LOGIN</button>
                 </form>
-                <Link to="/register">Don't have an account? Register</Link>
+                <Link to="/register">Create an account</Link>
             </div>
+
             <div className="news-bar">
                 <div className="news-text">
-                    HORIZON TRAVELS at your service. At first, you need to register an account to access all the services
+                    ✨ HORIZON TRAVELS at your service. Login to explore our premium routes. ✨
                 </div>
             </div>
         </>
