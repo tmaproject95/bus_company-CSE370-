@@ -13,9 +13,13 @@ export default function Trips() {
     useEffect(() => {
         if (!src || !dst) return;
 
+        // FIX: Used backticks (`) here so variables work
         fetch(`http://localhost:5000/api/routes?src=${src}&dst=${dst}`)
             .then(res => res.json())
-            .then(data => setTrips(data))
+            .then(data => {
+                console.log("Trips data:", data); // Debugging
+                setTrips(data);
+            })
             .catch(err => console.error(err));
     }, [src, dst]);
 
@@ -24,19 +28,29 @@ export default function Trips() {
             <h2 className="title">Available Buses</h2>
 
             {trips.length === 0 && (
-                <p style={{ color: "white", textAlign: "center" }}>
-                    No buses available
-                </p>
+                <div style={{ textAlign: "center", color: "white", marginTop: "50px" }}>
+                    <h3>No buses available</h3>
+                    <p>Check if your database has trips scheduled for today or future dates.</p>
+                </div>
             )}
 
             {trips.map((t) => (
                 <div className="trip-card" key={t.trip_id}>
-                    <h3>{t.bus_number} ({t.bus_type})</h3>
-                    <p>Date: {t.date}</p>
-                    <p>Time: {t.departure_time} - {t.arrival_time}</p>
-                    <p>Fare: ৳{t.fare}</p>
+                    <div className="trip-info">
+                        <h3>{t.bus_number} <span className="bus-type">({t.bus_type})</span></h3>
+                        <div className="trip-route">
+                            <p>{t.source} ➝ {t.destination}</p>
+                        </div>
+                    </div>
+
+                    <div className="trip-details">
+                        <p>📅 {t.date}</p>
+                        <p>⏰ {t.departure_time} - {t.arrival_time}</p>
+                        <p className="fare">৳ {t.fare}</p>
+                    </div>
 
                     <button
+                        className="view-seats-btn"
                         onClick={() => navigate(`/seats?tid=${t.trip_id}`)}
                     >
                         View Seats

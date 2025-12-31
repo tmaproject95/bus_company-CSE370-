@@ -17,9 +17,21 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post("/user/login", formData);
-            alert("Login Successful");
-            navigate("/search");
+            const res = await axios.post("/user/login", formData);
+
+            if (res.data === "Login Successful" || res.data.message === "Login Successful") {
+                alert("Login Successful");
+
+                if (res.data.user_id) {
+                    localStorage.setItem("userId", res.data.user_id);
+                } else {
+                    console.warn("Backend did not return user_id. Booking might fail.");
+                }
+
+                navigate("/search");
+            } else {
+                alert(res.data);
+            }
         } catch (err) {
             alert(err.response?.data || "Invalid credentials");
         }
