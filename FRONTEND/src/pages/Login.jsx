@@ -19,16 +19,20 @@ const Login = () => {
         try {
             const res = await axios.post("/user/login", formData);
 
-            if (res.data === "Login Successful" || res.data.message === "Login Successful") {
+            if (res.data.message === "Login Successful") {
                 alert("Login Successful");
 
-                if (res.data.user_id) {
-                    localStorage.setItem("userId", res.data.user_id);
-                } else {
-                    console.warn("Backend did not return user_id. Booking might fail.");
-                }
+                // Store info in localStorage
+                localStorage.setItem("userId", res.data.user_id);
+                localStorage.setItem("userName", res.data.name);
+                localStorage.setItem("userRole", res.data.role);
 
-                navigate("/search");
+                // Redirect based on role
+                if (res.data.role === "admin") {
+                    navigate("/admin"); // admin dashboard route
+                } else {
+                    navigate("/search"); // normal user route
+                }
             } else {
                 alert(res.data);
             }
@@ -46,8 +50,22 @@ const Login = () => {
             <div className="auth-container">
                 <h2>Login</h2>
                 <form onSubmit={handleSubmit}>
-                    <input type="email" name="em" placeholder="Email" onChange={handleChange} required />
-                    <input type="password" name="pa" placeholder="Password" onChange={handleChange} required />
+                    <input
+                        type="email"
+                        name="em"
+                        placeholder="Email"
+                        value={formData.em}
+                        onChange={handleChange}
+                        required
+                    />
+                    <input
+                        type="password"
+                        name="pa"
+                        placeholder="Password"
+                        value={formData.pa}
+                        onChange={handleChange}
+                        required
+                    />
                     <button type="submit">LOGIN</button>
                 </form>
                 <Link to="/register">Create an account</Link>

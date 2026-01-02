@@ -10,7 +10,7 @@ const SeatsBooking = () => {
     const { seat, seatId, tripId } = location.state || {};
 
     const [bookingId, setBookingId] = useState(null);
-    const [status, setStatus] = useState("initial"); // initial, pending, cancelled
+    const [status, setStatus] = useState("initial");
     const [message, setMessage] = useState("");
 
     const userId = localStorage.getItem("userId");
@@ -21,14 +21,12 @@ const SeatsBooking = () => {
             navigate("/login");
         }
         if (!seat || !tripId) {
-            // Don't redirect immediately so they can read the error on screen
+
             setStatus("error");
         }
     }, [userId, seat, tripId, navigate]);
 
-    // --- BACKEND INTERACTIONS ---
 
-    // Matches your backend: createbooking (uid, tid, sid)
     const handleCreateBooking = async () => {
         if (!userId) return;
 
@@ -40,11 +38,11 @@ const SeatsBooking = () => {
                 sid: parseInt(seatId)
             });
 
-            // If successful, backend returns { message, booking_id }
+
             if (res.status === 200) {
                 setBookingId(res.data.booking_id);
                 setStatus("pending");
-                setMessage(res.data.message); // "Booking created as pending"
+                setMessage(res.data.message);
             }
         } catch (err) {
             console.error(err);
@@ -52,7 +50,6 @@ const SeatsBooking = () => {
         }
     };
 
-    // Matches your backend: cancelbooking (bid, uid)
     const handleCancelBooking = async () => {
         if (!bookingId) return;
 
@@ -65,10 +62,9 @@ const SeatsBooking = () => {
 
             if (res.status === 200) {
                 setStatus("cancelled");
-                setMessage(res.data); // "Your Booking cancelled successfully..."
+                setMessage(res.data);
                 setBookingId(null);
 
-                // Optional: Redirect after short delay
                 setTimeout(() => navigate("/search"), 2000);
             }
         } catch (err) {
@@ -81,9 +77,6 @@ const SeatsBooking = () => {
         alert("Payment Gateway - Coming Soon!");
     };
 
-    // --- RENDER ---
-
-    // Safety: If accessed directly without selecting a seat
     if (status === "error" || !seat) {
         return (
             <div className="booking-overlay">
@@ -123,14 +116,14 @@ const SeatsBooking = () => {
                 </div>
 
                 <div className="action-buttons">
-                    {/* STEP 1: CREATE BOOKING */}
+
                     {status === "initial" && (
                         <button className="btn-primary" onClick={handleCreateBooking}>
                             Confirm & Hold Seat
                         </button>
                     )}
 
-                    {/* STEP 2: PAY OR CANCEL */}
+
                     {status === "pending" && (
                         <>
                             <button className="btn-success" onClick={handleProceedToPay}>
@@ -142,14 +135,14 @@ const SeatsBooking = () => {
                         </>
                     )}
 
-                    {/* STEP 3: CANCELLED */}
+
                     {status === "cancelled" && (
                         <button className="btn-secondary" onClick={() => navigate("/search")}>
                             Find Another Bus
                         </button>
                     )}
 
-                    {/* ALWAYS SHOW BACK BUTTON IF NOT PENDING */}
+
                     {status === "initial" && (
                         <button className="btn-text" onClick={() => navigate(-1)}>
                             Go Back

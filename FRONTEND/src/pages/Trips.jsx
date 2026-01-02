@@ -12,8 +12,6 @@ export default function Trips() {
 
     useEffect(() => {
         if (!src || !dst) return;
-
-        // FIX: Used backticks (`) here so variables work
         fetch(`http://localhost:5000/api/routes?src=${src}&dst=${dst}`)
             .then(res => res.json())
             .then(data => {

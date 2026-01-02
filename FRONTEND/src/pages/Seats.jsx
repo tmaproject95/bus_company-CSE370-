@@ -3,11 +3,10 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import axios from "axios";
 import "./Seats.css";
 
-// SVG Icon for the Chair (Matches your screenshot style)
 const SeatIcon = ({ status, onClick }) => {
-    let fillColor = "#000000"; // Default Black (Available)
-    if (status === "selected") fillColor = "#00ff00"; // Green (Selected)
-    if (status === "occupied") fillColor = "#ff0000"; // Red (Occupied)
+    let fillColor = "#000000";
+    if (status === "selected") fillColor = "#00ff00";
+    if (status === "occupied") fillColor = "#ff0000";
 
     return (
         <svg
@@ -17,7 +16,7 @@ const SeatIcon = ({ status, onClick }) => {
             onClick={onClick}
             style={{ cursor: status === "occupied" ? "not-allowed" : "pointer" }}
         >
-            {/* Simple Armchair Shape */}
+
             <path
                 d="M4 18v3h3v-3h10v3h3v-6a4 4 0 0 0-4-4h-8a4 4 0 0 0-4 4v3zm2-8h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2z"
                 fill={fillColor}
@@ -45,7 +44,7 @@ const Seats = () => {
     const handleSeatClick = (seatObj) => {
         if (seatObj.is_booked === 1) return; // Ignore occupied
 
-        // Toggle selection
+
         if (selectedSeat && selectedSeat.seat_id === seatObj.seat_id) {
             setSelectedSeat(null);
         } else {
@@ -67,7 +66,7 @@ const Seats = () => {
 
     return (
         <div className="seats-page-white">
-            {/* 1. Legend Section */}
+
             <div className="legend-container">
                 <h3>Seat Legend:</h3>
                 <div className="legend-items">
@@ -83,9 +82,8 @@ const Seats = () => {
                 </div>
             </div>
 
-            {/* 2. Bus Container */}
             <div className="bus-container">
-                {/* Driver Icon */}
+
                 <div className="driver-row">
                     <span role="img" aria-label="driver" style={{fontSize: '30px'}}>steering_wheel</span>
                     {/* Or use an SVG for steering wheel if preferred */}
@@ -106,14 +104,14 @@ const Seats = () => {
                                     status={status}
                                     onClick={() => handleSeatClick(seat)}
                                 />
-                                {/* Only show label if you want letters like A1 inside or below */}
+
                             </div>
                         );
                     })}
                 </div>
             </div>
 
-            {/* 3. Submit Button */}
+
             <div className="action-area">
                 <button className="submit-btn-simple" onClick={handleConfirm}>
                     Submit

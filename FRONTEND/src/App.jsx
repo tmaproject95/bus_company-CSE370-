@@ -5,6 +5,7 @@ import BusSearch from './pages/BusSearch';
 import Trips from './pages/Trips';
 import Seats from './pages/Seats';
 import InitBooking from './pages/initbooking';
+import Admin from './pages/Admin';
 
 import './App.css';
 
@@ -19,10 +20,8 @@ function App() {
                     <Route path="/search" element={<BusSearch />} />
                     <Route path="/trips" element={<Trips />} />
                     <Route path="/seats" element={<Seats />} />
-
-                    {/* ADD THIS ROUTE BELOW */}
                     <Route path="/initbookings" element={<InitBooking />} />
-
+                    <Route path="/admin" element={<Admin />} />
                 </Routes>
             </div>
 
