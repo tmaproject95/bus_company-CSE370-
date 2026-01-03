@@ -8,8 +8,13 @@ import InitBooking from './pages/initbooking';
 import Admin from './pages/Admin';
 import Notifications from "./pages/Notifications";
 import LiveLocation from "./pages/LiveLocation";
+import Payment from "./pages/Payment";
+import Ticket from "./pages/Ticket";
+
+
 import { FiBell } from "react-icons/fi";
 import { useEffect, useState } from "react";
+
 import axios from "./api/axios";
 
 import './App.css';
@@ -99,6 +104,10 @@ function App() {
                     {/* teammate 3 feature */}
                     <Route path="/notifications" element={<Notifications />} />
                     <Route path="/live-location" element={<LiveLocation />} />
+                    <Route path="/payment" element={<Payment />} />
+                    <Route path="/ticket" element={<Ticket />} />
+
+
                 </Routes>
             </div>
 
