@@ -29,10 +29,20 @@ export const createbooking = (req, res) => {
                 "INSERT INTO Bookings (user_id, trip_id, seat_id, status) VALUES (?, ?, ?, 'pending')";
 
             connection.query(insertQuery, [uid, tid, sid], (err, result) => {
-                connection.release();
                 if (err) {
+                    connection.release();
                     return res.status(500).send("Something went wrong.");
                 }
+
+                /* teammate 3s code */
+                const nq = `
+                    INSERT INTO Notifications (user_id, trip_id, message, type)
+                    VALUES (?, ?, ?, 'booking')
+                `;
+                connection.query(nq, [uid, tid, "Your booking has been created and is pending."]);
+                /* teammate 3s code */
+
+                connection.release();
                 return res.status(200).json({
                     message: "Booking created as pending",
                     booking_id: result.insertId
@@ -54,7 +64,7 @@ export const cancelbooking = (req, res) => {
             return res.status(500).send("Something went wrong");
         }
 
-        const q1 = "SELECT status FROM Bookings WHERE booking_id = ? AND user_id = ?";
+        const q1 = "SELECT status, trip_id FROM Bookings WHERE booking_id = ? AND user_id = ?";
 
         connection.query(q1, [bid, uid], (err, result) => {
             if (err) {
@@ -72,13 +82,24 @@ export const cancelbooking = (req, res) => {
                 return res.status(400).send("Booking already cancelled");
             }
 
+            const trip_id = result[0].trip_id;
             const q2 = "UPDATE Bookings SET status = 'cancelled' WHERE booking_id = ? AND user_id = ?";
 
             connection.query(q2, [bid, uid], (err) => {
-                connection.release();
                 if (err) {
+                    connection.release();
                     return res.status(500).send("Something went wrong");
                 }
+
+                /* teammate 3s code */
+                const nq = `
+                    INSERT INTO Notifications (user_id, trip_id, message, type)
+                    VALUES (?, ?, ?, 'booking')
+                `;
+                connection.query(nq, [uid, trip_id, "Your booking has been cancelled successfully."]);
+                /* teammate 3s code */
+
+                connection.release();
                 return res.status(200).send("Your Booking cancelled successfully, Thanks for your patience");
             });
         });

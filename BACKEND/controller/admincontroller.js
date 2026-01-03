@@ -152,6 +152,9 @@ export const updateTripFare = (req, res) => {
 };
 
 
+
+
+
 export const updateTripStatus = (req, res) => {
     const { trip_id, trip_status } = req.body;
 
@@ -171,9 +174,22 @@ export const updateTripStatus = (req, res) => {
                 return res.status(500).send("Trip status update failed");
             }
 
-
             if (trip_status === "cancelled") {
                 connection.query(q2, [trip_id], () => {
+
+                    /* teammate 3s code */
+                    const nq = `
+                        INSERT INTO Notifications (user_id, trip_id, message, type)
+                        SELECT user_id, ?, ?, 'delay'
+                        FROM Bookings
+                        WHERE trip_id = ?
+                    `;
+                    connection.query(
+                        nq,
+                        [trip_id, "Your trip has been cancelled by admin.", trip_id]
+                    );
+                    /* teammate 3s code */
+
                     connection.release();
                     res.status(200).send("Trip cancelled and bookings updated");
                 });
@@ -184,3 +200,4 @@ export const updateTripStatus = (req, res) => {
         });
     });
 };
+

@@ -6,6 +6,7 @@ import busnroute from "./routes/busnroute.js"
 import seats from "./routes/seats.js"
 import bookmanage from "./routes/bookmanage.js"
 import admin from "./routes/admin.js";
+import system from "./routes/system.js";
 
 
 
@@ -18,6 +19,8 @@ app.use("/api/routes",busnroute);
 app.use("/api/seats",seats);
 app.use("/api/initbooking",bookmanage);
 app.use("/api/admin", admin);
+app.use("/api/system", system);
+
 
 
 
