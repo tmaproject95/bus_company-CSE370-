@@ -12,10 +12,11 @@ export default function Trips() {
 
     useEffect(() => {
         if (!src || !dst) return;
+
         fetch(`http://localhost:5000/api/routes?src=${src}&dst=${dst}`)
             .then(res => res.json())
             .then(data => {
-                console.log("Trips data:", data); // Debugging
+                console.log("Trips data:", data);
                 setTrips(data);
             })
             .catch(err => console.error(err));
@@ -35,7 +36,10 @@ export default function Trips() {
             {trips.map((t) => (
                 <div className="trip-card" key={t.trip_id}>
                     <div className="trip-info">
-                        <h3>{t.bus_number} <span className="bus-type">({t.bus_type})</span></h3>
+                        <h3>
+                            {t.bus_number}
+                            <span className="bus-type"> ({t.bus_type})</span>
+                        </h3>
                         <div className="trip-route">
                             <p>{t.source} ➝ {t.destination}</p>
                         </div>
@@ -47,12 +51,23 @@ export default function Trips() {
                         <p className="fare">৳ {t.fare}</p>
                     </div>
 
-                    <button
-                        className="view-seats-btn"
-                        onClick={() => navigate(`/seats?tid=${t.trip_id}`)}
-                    >
-                        View Seats
-                    </button>
+                    <div style={{ display: "flex", gap: "10px" }}>
+                        <button
+                            className="view-seats-btn"
+                            onClick={() => navigate(`/seats?tid=${t.trip_id}`)}
+                        >
+                            View Seats
+                        </button>
+
+                        {/* FEATURE 8: LIVE LOCATION */}
+                        <button
+                            className="view-seats-btn"
+                            style={{ backgroundColor: "#0984e3" }}
+                            onClick={() => navigate(`/live-location?tid=${t.trip_id}`)}
+                        >
+                            Track Bus
+                        </button>
+                    </div>
                 </div>
             ))}
         </div>

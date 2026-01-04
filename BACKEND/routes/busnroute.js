@@ -7,4 +7,3 @@ router.get('/',busroute);
 
 export default router;
 
-
