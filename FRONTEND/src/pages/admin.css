@@ -6,8 +6,9 @@
 
     background: rgba(255, 255, 255, 0.95);
     border-radius: 12px;
+    position: relative;
+    z-index: 1;
 }
-
 
 .admin-container h1 {
     text-align: center;
@@ -21,6 +22,8 @@
     margin-bottom: 25px;
     border-radius: 8px;
     background-color: #f9f9f9;
+    position: relative;
+    z-index: 1;
 }
 
 .admin-section h2 {
@@ -32,14 +35,13 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 12px;
+    position: relative;
+    z-index: 1;
 }
 
 .admin-section form button {
     grid-column: span 2;
 }
-
-
-
 
 .admin-section button {
     padding: 8px 15px;
@@ -48,17 +50,29 @@
     color: white;
     border-radius: 5px;
     cursor: pointer;
+    position: relative;
+    z-index: 1;
 }
 
 .admin-section button:hover {
     background-color: #2980b9;
 }
+
 .admin-section input {
-    flex: 1 1 200px;
     padding: 8px;
     border-radius: 5px;
     border: 1px solid #ccc;
     background-color: #fff;
     color: #000;
+    position: relative;
+    z-index: 5;
+    pointer-events: auto;
 }
 
+
+.admin-section input[type="date"],
+.admin-section input[type="time"] {
+    position: relative;
+    z-index: 10;
+    pointer-events: auto;
+}

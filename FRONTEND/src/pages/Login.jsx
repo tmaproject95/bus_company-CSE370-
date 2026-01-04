@@ -22,12 +22,12 @@ const Login = () => {
             if (res.data.message === "Login Successful") {
                 alert("Login Successful");
 
-                // Store info in localStorage
+
                 localStorage.setItem("userId", res.data.user_id);
                 localStorage.setItem("userName", res.data.name);
                 localStorage.setItem("userRole", res.data.role);
 
-                // Redirect based on role
+
                 if (res.data.role === "admin") {
                     navigate("/admin"); // admin dashboard route
                 } else {

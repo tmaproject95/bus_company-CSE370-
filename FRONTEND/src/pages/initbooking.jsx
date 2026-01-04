@@ -7,20 +7,17 @@ const InitBooking = () => {
     const location = useLocation();
     const navigate = useNavigate();
 
-    // 1️⃣ Get Data from Seats page
     const { seat, seatId, tripId } = location.state || {};
 
-    // 2️⃣ State Variables
     const [bookingId, setBookingId] = useState(null);
-    const [status, setStatus] = useState("initial"); // initial -> pending -> cancelled
+    const [status, setStatus] = useState("initial");
     const [message, setMessage] = useState("");
     const [loading, setLoading] = useState(false);
 
-    // 3️⃣ Get User ID (fallback to 1 if not logged in)
+
     const storedUserId = localStorage.getItem("userId");
     const userId = storedUserId ? storedUserId : "1";
 
-    // 4️⃣ Validate Session
     useEffect(() => {
         if (!seat || !seatId || !tripId) {
             setMessage("Invalid session. Please select a seat again.");
@@ -28,9 +25,9 @@ const InitBooking = () => {
         }
     }, [seat, seatId, tripId]);
 
-    // --- API HANDLERS ---
 
-    // 5️⃣ Confirm & Hold Seat
+
+
     const handleCreateBooking = async () => {
         if (!seatId || !tripId) {
             setMessage("Seat or Trip information is missing.");
@@ -65,7 +62,7 @@ const InitBooking = () => {
         setLoading(false);
     };
 
-    // 6️⃣ Cancel Booking
+
     const handleCancelBooking = async () => {
         if (!bookingId) return;
         setLoading(true);
@@ -92,7 +89,7 @@ const InitBooking = () => {
         setLoading(false);
     };
 
-    // 7️⃣ Proceed to Payment
+
     const handleProceedToPay = () => {
         if (!bookingId) {
             setMessage("Booking not created yet. Confirm your seat first.");
@@ -101,7 +98,7 @@ const InitBooking = () => {
         navigate(`/payment?booking_id=${bookingId}`);
     };
 
-    // --- RENDER UI ---
+
 
     if (status === "error") {
         return (
@@ -153,7 +150,7 @@ const InitBooking = () => {
                         </>
                     )}
 
-                    {/* STEP 2: PENDING */}
+
                     {status === "pending" && (
                         <>
                             <button
@@ -173,7 +170,7 @@ const InitBooking = () => {
                         </>
                     )}
 
-                    {/* STEP 3: CANCELLED */}
+
                     {status === "cancelled" && <p>Redirecting to home...</p>}
                 </div>
             </div>

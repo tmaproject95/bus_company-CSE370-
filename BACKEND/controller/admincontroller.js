@@ -1,8 +1,5 @@
 import pool from "../db.js";
 
-/*
-   FEATURE 4: VEHICLE & SEAT CONFIGURATION (ADMIN)
- */
 
 
 export const addVehicle = (req, res) => {
@@ -11,6 +8,7 @@ export const addVehicle = (req, res) => {
     if (!bus_number || !type || !total_seats) {
         return res.status(400).send("Missing vehicle information");
     }
+
 
     pool.getConnection((err, connection) => {
         if (err) return res.status(500).send("DB error");
@@ -61,9 +59,7 @@ export const generateSeats = (req, res) => {
     });
 };
 
-/*
-   FEATURE 5: ROUTE & TRIP SCHEDULING (ADMIN)
-*/
+
 
 
 export const createRoute = (req, res) => {
@@ -126,9 +122,7 @@ export const createTrip = (req, res) => {
     });
 };
 
-/*
-   FEATURE 6: FARE & TRIP STATUS MANAGEMENT (ADMIN)
- */
+
 
 export const updateTripFare = (req, res) => {
     const { trip_id, fare } = req.body;

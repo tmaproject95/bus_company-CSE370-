@@ -1,8 +1,6 @@
 import pool from "../db.js";
 
-/* ================================
-   1️⃣ MAKE PAYMENT
-================================ */
+
 export const makePayment = (req, res) => {
     const { booking_id, user_id, method } = req.body;
 
@@ -13,7 +11,7 @@ export const makePayment = (req, res) => {
     pool.getConnection((err, connection) => {
         if (err) return res.status(500).json({ message: "DB error" });
 
-        // 1️⃣ Get booking + trip fare
+      
         const bookingQuery = `
             SELECT b.status, t.fare
             FROM Bookings b
@@ -34,7 +32,7 @@ export const makePayment = (req, res) => {
 
             const amount = result[0].fare;
 
-            // 2️⃣ Insert payment
+
             const paymentQuery = `
                 INSERT INTO Payments (booking_id, user_id, amount, method)
                 VALUES (?, ?, ?, ?)
@@ -46,7 +44,7 @@ export const makePayment = (req, res) => {
                     return res.status(500).json({ message: "Payment failed" });
                 }
 
-                // 3️⃣ Confirm booking
+
                 const updateBooking = `
                     UPDATE Bookings SET status = 'confirmed'
                     WHERE booking_id = ?
@@ -58,7 +56,7 @@ export const makePayment = (req, res) => {
                         return res.status(500).json({ message: "Booking update failed" });
                     }
 
-                    // 4️⃣ Notification
+
                     const notifyQuery = `
                         INSERT INTO Notifications (user_id, message, type)
                         VALUES (?, 'Payment successful. Booking confirmed.', 'payment')
@@ -74,9 +72,7 @@ export const makePayment = (req, res) => {
     });
 };
 
-/* ================================
-   2️⃣ GET SINGLE BOOKING DETAILS
-================================ */
+
 export const getBookingDetails = (req, res) => {
     const { booking_id } = req.params;
 
@@ -103,9 +99,7 @@ export const getBookingDetails = (req, res) => {
     });
 };
 
-/* ================================
-   3️⃣ GET ALL BOOKINGS OF USER
-================================ */
+
 export const getUserBookings = (req, res) => {
     const { user_id } = req.params;
 

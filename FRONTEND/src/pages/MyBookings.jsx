@@ -93,7 +93,7 @@ const MyBookings = () => {
                         </span>
                     </p>
 
-                    {/* ACTION BUTTONS */}
+
                     <div style={{ marginTop: "10px" }}>
                         {b.status === "pending" && (
                             <>

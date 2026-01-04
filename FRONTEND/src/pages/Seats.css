@@ -1,4 +1,4 @@
-/* Clean White Background */
+
 .seats-page-white {
     min-height: 100vh;
     background-color: #ffffff;
@@ -9,7 +9,7 @@
     font-family: Arial, sans-serif;
 }
 
-/* Legend Header */
+
 .legend-container {
     text-align: center;
     margin-bottom: 20px;
@@ -37,39 +37,38 @@
     gap: 5px;
 }
 
-/* Bus Box (The grey border) */
 .bus-container {
     border: 3px solid #888;
-    padding: 10px 20px 40px 20px; /* Extra bottom padding */
+    padding: 10px 20px 40px 20px;
     width: 250px;
     position: relative;
     background-color: white;
 }
 
-/* Driver Icon - Aligned Top Right */
+
 .driver-row {
     display: flex;
     justify-content: flex-end;
     margin-bottom: 15px;
 }
 
-/* Grid Layout */
+
 .seats-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 columns */
+    grid-template-columns: repeat(4, 1fr);
     row-gap: 15px;
     justify-items: center;
 }
 
-/* The Aisle (Gap after 2nd column) */
+
 .aisle-right {
     margin-right: 40px;
 }
 
-/* Submit Button Area */
+
 .action-area {
     margin-top: 10px;
-    width: 250px; /* Same width as bus */
+    width: 250px;
 }
 
 .submit-btn-simple {

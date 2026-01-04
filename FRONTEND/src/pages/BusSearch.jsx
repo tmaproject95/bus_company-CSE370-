@@ -2,13 +2,14 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const BusSearch = () => {
-    const sources = ['Dhaka', 'Chittagong', 'Sylhet', 'Khulna'];
+    const sources = ['Dhaka', 'Chittagong', 'Sylhet', 'Khulna','Cumilla','Bogura'];
 
     const destinationsMap = {
         Dhaka: ['Chittagong', 'Sylhet', 'Khulna'],
         Chittagong: ["Cox's Bazar"],
         Sylhet: ['Moulvibazar'],
-        Khulna: ['Jessore']
+        Khulna: ['Jessore'],
+        Cumilla: ['Khulna','Bogura']
     };
 
     const [selectedSource, setSelectedSource] = useState('');
@@ -48,7 +49,7 @@ const BusSearch = () => {
         <div className="search-page-background">
             <div className="search-wrapper">
 
-                {/* VIEW ALL BOOKINGS BUTTON */}
+               
                 <div style={{
                     width: "100%",
                     display: "flex",

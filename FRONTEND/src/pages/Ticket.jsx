@@ -19,7 +19,7 @@ const Ticket = () => {
     const handleDownload = () => {
         if (!ticket) return;
 
-        // 1️⃣ Prepare ticket content
+
         const content = `
 🎫 HORIZON TRAVELS - Bus Ticket
 
@@ -37,11 +37,11 @@ Status: Paid
 Thank you for booking with us!
         `;
 
-        // 2️⃣ Create a blob and URL
+    
         const blob = new Blob([content], { type: "text/plain" });
         const url = URL.createObjectURL(blob);
 
-        // 3️⃣ Create temporary link and click it
+
         const link = document.createElement("a");
         link.href = url;
         link.download = `Ticket_${ticket.booking_id}.txt`;
@@ -49,11 +49,31 @@ Thank you for booking with us!
         link.click();
         document.body.removeChild(link);
 
-        // 4️⃣ Release URL
+
         URL.revokeObjectURL(url);
     };
 
-    if (!ticket) return <p style={{ padding: "30px" }}>Loading ticket...</p>;
+    if (!ticket)
+  return (
+    <p
+      style={{
+        minHeight: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        fontSize: "26px",
+        fontWeight: "600",
+        color: "#2e7d32",
+        background: "linear-gradient(135deg, #e8f5e9, #f1f8e9)",
+        textAlign: "center",
+        letterSpacing: "0.5px",
+      }}
+    >
+      Yaayyyyy....Booking created successfully <br />
+      Happy Journey!!! 
+    </p>
+  );
+
 
     return (
         <div style={{ padding: "40px", maxWidth: "600px", margin: "auto" }}>

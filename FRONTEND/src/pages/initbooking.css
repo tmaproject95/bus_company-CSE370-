@@ -4,12 +4,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: url('/images/photoo.jpg') no-repeat center center fixed; /* Uses your existing bg */
+    background: url('/images/photoo.jpg') no-repeat center center fixed;
     background-size: cover;
     position: relative;
 }
 
-/* Dark overlay */
+
 .init-container::before {
     content: "";
     position: absolute;
