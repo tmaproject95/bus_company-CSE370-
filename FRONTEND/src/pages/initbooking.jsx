@@ -134,7 +134,7 @@ const InitBooking = () => {
                 <div className="message-area">{message}</div>
 
                 <div className="button-group">
-                    {/* STEP 1: INITIAL */}
+                  
                     {status === "initial" && (
                         <>
                             <button

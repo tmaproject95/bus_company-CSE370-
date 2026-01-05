@@ -117,7 +117,7 @@ const BusSearch = () => {
                             <span>{selectedDest}</span>
                         </div>
 
-                        <p className="route-status">Route Available ✅</p>
+                        <p className="route-status">Congratulations...Route Available </p>
 
                         <button className="confirm-btn" onClick={handleConfirmRedirect}>
                             CONFIRM & SEARCH BUSES

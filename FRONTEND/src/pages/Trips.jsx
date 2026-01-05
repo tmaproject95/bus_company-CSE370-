@@ -59,7 +59,7 @@ export default function Trips() {
                             View Seats
                         </button>
 
-                        {/* FEATURE 8: LIVE LOCATION */}
+                        {/* FEATURE 8: LIVE LOCATION NOT USEDDDD */}
                         <button
                             className="view-seats-btn"
                             style={{ backgroundColor: "#0984e3" }}

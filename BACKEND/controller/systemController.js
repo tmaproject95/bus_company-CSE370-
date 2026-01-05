@@ -1,6 +1,6 @@
 import pool from "../db.js";
 
-/* FEATURE 8: LIVE BUS TRACKING */
+
 
 export const updateLiveLocation = (req, res) => {
     const { trip_id, vehicle_id, latitude, longitude } = req.body;
@@ -12,13 +12,13 @@ export const updateLiveLocation = (req, res) => {
     pool.getConnection((err, connection) => {
         if (err) return res.status(500).send("DB error");
 
-        /* teammate 3 code */
+    
         const checkQ = `
             SELECT location_id
             FROM Live_Location
             WHERE trip_id = ?
         `;
-        /* teammate 3 code */
+       
 
         connection.query(checkQ, [trip_id], (err, result) => {
             if (err) {
@@ -26,7 +26,7 @@ export const updateLiveLocation = (req, res) => {
                 return res.status(500).send("Location update failed");
             }
 
-            /* teammate 3 code */
+          
             if (result.length > 0) {
                 const updateQ = `
                     UPDATE Live_Location
@@ -49,7 +49,7 @@ export const updateLiveLocation = (req, res) => {
                     res.status(200).send("Location updated");
                 });
             }
-            /* teammate 3 code */
+         
         });
     });
 };
@@ -77,7 +77,7 @@ export const getLiveLocation = (req, res) => {
     });
 };
 
-/* FEATURE 9: NOTIFICATIONS (UNCHANGED) */
+
 
 export const getUserNotifications = (req, res) => {
     const { user_id } = req.params;
